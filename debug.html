@@ -3,27 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AR.js – Fullscreen Fix</title>
+  <title>AR.js Fullscreen Fixed</title>
 
-  <!-- A‑Frame 1.4.2 -->
+  <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <!-- AR.js 3.3.3 -->
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.3/aframe/build/aframe-ar.js"></script>
-  
+  <!-- AR.js v3.4.6 עם תיקוני אירועים -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.6/aframe/build/aframe-ar.min.js"></script>
+
   <style>
-    /* וודא שכל האלמנטים ממלאים את המסך */
     html, body {
       margin: 0; padding: 0;
       width: 100vw; height: 100vh;
-      overflow: hidden;
-      background: #000;
+      overflow: hidden; background: #000;
     }
-    /* הסתר כל גלריית טעינה של AR.js */
-    .arjs-loader { display: none !important; }
-    /* הסתר כפתור ברירת המחדל */
-    #startBtn { display: none; }
-
-    /* כל וידאו, קנבס וסצנת A‑Frame יתפרסו על כל המסך */
+    /* מכל האלבנטים תופס את כל המסך */
     a-scene,
     a-scene video,
     a-scene canvas,
@@ -33,18 +26,19 @@
       width: 100vw !important;
       height: 100vh !important;
       object-fit: cover;
-      z-index: 0;
     }
+    /* הסתר כל האוברליי של טעינה */
+    .arjs-loader { display: none !important; }
   </style>
 </head>
 
 <body>
-  <!-- הסצנה נטענת ישר (בלי כפתור) -->
   <a-scene
-    vr-mode-ui="enabled:false"
-    arjs="sourceType: webcam; debugUIEnabled: false; facingMode: environment;"
-  >
-    <!-- לנסות תחילה עם מרקר Hiro מובנה -->
+    embedded
+    vr-mode-ui="enabled: false"
+    arjs="sourceType: webcam; debugUIEnabled: true; trackingMethod: best;">
+    
+    <!-- מרקר hiro מובנה לבדיקת תקינות -->
     <a-marker preset="hiro">
       <a-box color="red" position="0 0.5 0" scale="0.5 0.5 0.5"></a-box>
     </a-marker>
