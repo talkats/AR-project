@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AR.js Fullscreen Fixed</title>
+  <title>AR.js – Transparent Canvas</title>
 
-  <!-- A-Frame -->
+  <!-- A‑Frame -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <!-- AR.js v3.4.6 עם תיקוני אירועים -->
+  <!-- AR.js v3.4.6 -->
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.6/aframe/build/aframe-ar.min.js"></script>
 
   <style>
@@ -16,7 +16,7 @@
       width: 100vw; height: 100vh;
       overflow: hidden; background: #000;
     }
-    /* מכל האלבנטים תופס את כל המסך */
+    /* ודא שכל האלמנטים יתפשטו על כל המסך */
     a-scene,
     a-scene video,
     a-scene canvas,
@@ -26,19 +26,32 @@
       width: 100vw !important;
       height: 100vh !important;
       object-fit: cover;
+      margin: 0; padding: 0;
     }
-    /* הסתר כל האוברליי של טעינה */
+    /* וידאו ברקע */
+    a-scene video,
+    a-scene .arjs-video video {
+      z-index: 0 !important;
+    }
+    /* קנבס על הווידאו, רקע שקוף */
+    a-scene canvas {
+      z-index: 1 !important;
+      background: transparent !important;
+    }
+    /* הסתר את מסך הטעינה */
     .arjs-loader { display: none !important; }
   </style>
 </head>
 
 <body>
   <a-scene
-    embedded
-    vr-mode-ui="enabled: false"
-    arjs="sourceType: webcam; debugUIEnabled: true; trackingMethod: best;">
-    
-    <!-- מרקר hiro מובנה לבדיקת תקינות -->
+      embedded
+      vr-mode-ui="enabled:false"
+      renderer="alpha: true; antialias: true;"
+      background="color: transparent"
+      arjs="sourceType: webcam; debugUIEnabled: true; trackingMethod: best;">
+
+    <!-- מרקר Hiro מובנה לבדיקות -->
     <a-marker preset="hiro">
       <a-box color="red" position="0 0.5 0" scale="0.5 0.5 0.5"></a-box>
     </a-marker>
