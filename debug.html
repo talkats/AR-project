@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MindAR • Image Tracking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MindAR – Local .mind</title>
 
   <!-- A‑Frame -->
   <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
-  <!-- MindAR (A‑Frame bundle) -->
+  <!-- MindAR (A‑Frame bundle) -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
 
   <style>html,body{margin:0;height:100%;overflow:hidden;background:#000}</style>
 </head>
 <body>
 
-  <!-- 1. מטעינים את קובץ .mind כנכס -->
-  <a-assets>
-    <a-asset-item id="mind-target" src="./targets.mind"></a-asset-item>
-    <!-- אם תרצה מודל GLB -->
-    <!-- <a-asset-item id="myModel" src="./model.glb"></a-asset-item> -->
-  </a-assets>
-
-  <!-- 2. סצנת MindAR -->
+  <!-- סצנת MindAR – מצביע ישירות על targets.mind -->
   <a-scene
-      mindar-image="imageTargetSrc: #mind-target; uiLoading: no; uiScanning: no"
+      mindar-image="imageTargetSrc: ./targets.mind; uiLoading: no; uiScanning: no"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
       embedded>
 
-    <!-- מצלמה -->
     <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-    <!-- יעד #0 מתוך targets.mind -->
+    <!-- יעד #0 -->
     <a-entity mindar-image-target="targetIndex: 0">
       <a-box color="red" depth="0.05" height="0.05" width="0.05" position="0 0 0"></a-box>
-
-      <!-- לדוגמה מודל GLB -->
-      <!--
-      <a-entity gltf-model="#myModel" scale="0.2 0.2 0.2" position="0 0 0"></a-entity>
-      -->
+      <!-- דוגמה למודל -->
+      <!-- <a-entity gltf-model="./model.glb" scale="0.2 0.2 0.2"></a-entity> -->
     </a-entity>
 
   </a-scene>
+
 </body>
 </html>
