@@ -4,30 +4,23 @@
   <!-- A‑Frame + MindAR -->
   <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
-
-  <!-- page fills the screen -->
   <style>html,body{margin:0;height:100%;overflow:hidden;background:#000}</style>
 </head>
 <body>
 
-  <!-- MindAR scene -->
   <a-scene
-      mindar-image="https://github.com/talkats/AR-project/blob/694fc18996c24b2be35058904c999b5d2ee3054a/mytarget.mind; uiLoading:no; uiScanning:no"
+      mindar-image="imageTargetSrc: ./mytarget.mind; uiLoading:no; uiScanning:no"
       vr-mode-ui="enabled:false"
       device-orientation-permission-ui="enabled:false"
       embedded>
 
-    <!-- MindAR camera -->
     <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-    <!-- first target (index 0) -->
     <a-entity mindar-image-target="targetIndex:0">
       <a-box position="0 0 0" depth="0.05" height="0.05" width="0.05" color="red"></a-box>
-      <!-- OR a 3‑D model
-      <a-entity gltf-model="./model.glb" scale="0.2 0.2 0.2"></a-entity>
-      -->
     </a-entity>
 
   </a-scene>
+
 </body>
 </html>
