@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AR.js – Transparent Canvas Fix</title>
+  <title>AR.js – Transparent Canvas (Final)</title>
 
   <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
@@ -16,7 +16,7 @@
       width: 100vw; height: 100vh;
       overflow: hidden; background: #000;
     }
-    /* וידאו ומסגרת Canvas יתפסו את כל המסך */
+    /* ווידאו + canvas תופסים את כל המסך */
     a-scene,
     a-scene video,
     a-scene canvas,
@@ -32,12 +32,12 @@
     .arjs-video video {
       z-index: 0 !important;
     }
-    /* Canvas שקוף ועם z-index גבוה יותר */
+    /* Canvas מעל הווידאו ושקוף */
     a-scene canvas {
       z-index: 1 !important;
       background: transparent !important;
     }
-    /* הסתר אותיות טעינה מיותרות */
+    /* הסתר את הטעינה המובנית */
     .arjs-loader { display: none !important; }
   </style>
 </head>
@@ -46,8 +46,8 @@
   <a-scene
     embedded
     vr-mode-ui="enabled:false"
-    renderer="alpha: true; antialias: true; clearColor: #000000; clearAlpha: 0"
-    arjs="sourceType: webcam; debugUIEnabled: true; trackingMethod: best">
+    renderer="alpha: true; antialias: true"
+    arjs="sourceType: webcam; debugUIEnabled: true; trackingMethod: best;">
 
     <!-- מרקר Hiro מובנה -->
     <a-marker preset="hiro">
@@ -56,5 +56,12 @@
 
     <a-entity camera></a-entity>
   </a-scene>
+
+  <script>
+    // לאחר טעינת ה-A-Frame scene, נבטל את clearColor כדי שהקנבס יהיה שקוף
+    document.querySelector('a-scene').addEventListener('renderstart', function () {
+      this.renderer.setClearColor(0x000000, 0); // צבע שחור עם alpha=0
+    });
+  </script>
 </body>
 </html>
