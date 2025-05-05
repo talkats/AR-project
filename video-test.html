@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="utf-8">
+  <title>Camera Test</title>
+  <style>html,body{margin:0;height:100%;background:#000;display:flex;align-items:center;justify-content:center;}
+         video{width:100%;height:auto;}</style>
+</head>
+<body>
+  <video autoplay playsinline></video>
+  <script>
+    navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}})
+      .then(stream => {
+        document.querySelector('video').srcObject = stream;
+      })
+      .catch(err => {
+        alert('Camera error: ' + err.name + '\n' + err.message);
+      });
+  </script>
+</body>
+</html>
