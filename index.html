@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html><head>
-  <meta charset="utf-8">
+<html>
+<head>
+  <!-- A‑Frame + MindAR -->
   <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
-  <style>
-    html,body{margin:0;height:100%;overflow:hidden;background:#000}
-    /* show camera feed */
-    .mindar-video{opacity:1!important;visibility:visible!important;
-                  width:100vw!important;height:100vh!important;
-                  object-fit:cover!important;position:absolute;top:0;left:0;z-index:0;}
-    /* transparent AR layer */
-    canvas[mindar]{background:transparent!important;z-index:1!important;}
-    /* hide overlay */
-    .mindar-ui-overlay,.mindar-ui-loading,.mindar-ui-scanning{display:none!important;}
-  </style>
-</head><body>
 
-<a-scene mindar-image="imageTargetSrc: ./targets.mind; uiLoading:no; uiScanning:no"
-         vr-mode-ui="enabled:false" device-orientation-permission-ui="enabled:false" embedded>
-  <a-camera look-controls="enabled:false"></a-camera>
-  <a-entity mindar-image-target="targetIndex:0">
-    <a-box color="red" depth="0.05" height="0.05" width="0.05"></a-box>
-  </a-entity>
-</a-scene>
+  <!-- page fills the screen -->
+  <style>html,body{margin:0;height:100%;overflow:hidden;background:#000}</style>
+</head>
+<body>
 
-</body></html>
+  <!-- MindAR scene -->
+  <a-scene
+      mindar-image="imageTargetSrc: ./mytarget.mind; uiLoading:no; uiScanning:no"
+      vr-mode-ui="enabled:false"
+      device-orientation-permission-ui="enabled:false"
+      embedded>
+
+    <!-- MindAR camera -->
+    <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+
+    <!-- first target (index 0) -->
+    <a-entity mindar-image-target="targetIndex:0">
+      <a-box position="0 0 0" depth="0.05" height="0.05" width="0.05" color="red"></a-box>
+      <!-- OR a 3‑D model
+      <a-entity gltf-model="./model.glb" scale="0.2 0.2 0.2"></a-entity>
+      -->
+    </a-entity>
+
+  </a-scene>
+</body>
+</html>
