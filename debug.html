@@ -1,29 +1,85 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AR.js Marker Camera Example</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AR.js – Start on Click</title>
 
-  <!-- A‑Frame -->
+  <!-- A‑Frame 1.4.2 -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <!-- AR.js עם תמיכה ב‑marker tracking -->
+  <!-- AR.js 3.3.3 -->
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.3/aframe/build/aframe-ar.js"></script>
 
   <style>
-    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
-    a-scene   { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: Arial, sans-serif;
+    }
+    /* כפתור הפעלה במרכז המסך */
+    #startBtn {
+      position: absolute;
+      z-index: 10;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #0078d4;
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+    }
+    /* הקונטיינר של ה‑AR */
+    #arContainer a-scene,
+    #arContainer video,
+    #arContainer canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    /* דואג ש‑video יתפוס את כל המסך ותפרוס על המסך */
+    #arContainer video {
+      object-fit: cover;
+      z-index: 1;
+    }
+    /* הקנבס מעל הווידאו */
+    #arContainer canvas {
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
 
-  <a-scene arjs="sourceType: webcam; debugUIEnabled: true;">
-    <!-- בדוק תחילה עם מרקר Hiro מובנה -->
-    <a-marker preset="hiro">
-      <a-box color="red" position="0 0.5 0" scale="0.5 0.5 0.5"></a-box>
-    </a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
+  <!-- כפתור שמתחיל את ה‑AR בלחיצה -->
+  <button id="startBtn">הפעל AR</button>
+  <div id="arContainer"></div>
 
+  <script>
+    const btn = document.getElementById('startBtn');
+    const container = document.getElementById('arContainer');
+
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none';
+
+      // טוען את הסצנה רק אחרי לחיצה (משתמש יוזם את getUserMedia)
+      container.innerHTML = `
+        <a-scene
+          vr-mode-ui="enabled:false"
+          embedded
+          arjs="sourceType: webcam; debugUIEnabled: true; facingMode: environment;"
+          renderer="alpha: true; antialias: true;">
+
+          <!-- בדיקה עם מרקר Hiro -->
+          <a-marker preset="hiro">
+            <a-box color="red" position="0 0.5 0"></a-box>
+          </a-marker>
+
+          <a-entity camera></a-entity>
+        </a-scene>
+      `;
+    });
+  </script>
 </body>
 </html>
