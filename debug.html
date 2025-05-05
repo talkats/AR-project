@@ -1,16 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="he">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MindAR • Image Tracking Demo</title>
+
+  <!-- A‑Frame -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <!-- MindAR (גרסת A‑Frame) -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
-  <style>html,body{margin:0;height:100%;}</style>
+
+  <style>
+    /* המסך כולו שייך למצלמה ו‑AR */
+    html, body {
+      margin: 0; padding: 0;
+      width: 100vw; height: 100vh;
+      overflow: hidden; background: #000;
+    }
+    /* קנבס + וידאו יתפרסו על כל המסך */
+    a-scene,
+    a-scene video,
+    a-scene canvas {
+      position: absolute !important;
+      top: 0; left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      object-fit: cover;
+    }
+  </style>
 </head>
+
 <body>
-  <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/examples/image-tracking/assets/card-example/card.mind; uiLoading:no;" vr-mode-ui="enabled:false" device-orientation-permission-ui="enabled: false">
-    <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+
+  <!-- סצנה עם MindAR -->
+  <a-scene
+      mindar-image="imageTargetSrc: ./targets.mind; uiScanning: no; uiLoading: no"
+      device-orientation-permission-ui="enabled: false"
+      embedded
+      vr-mode-ui="enabled: false">
+
+    <!-- מצלמה של MindAR -->
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- יעד #0 (הראשון בקובץ targets.mind) -->
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-box color="red" depth="0.05" height="0.05" width="0.05" position="0 0 0"></a-box>
+      <!-- דוגמה: קופסה אדומה 5 ס"מ -->
+      <a-box
+         color="red"
+         depth="0.05"
+         height="0.05"
+         width="0.05"
+         position="0 0 0">
+      </a-box>
+
+      <!-- לדוגמה: מודל תלת־ממדי -->
+      <!--
+      <a-entity
+         gltf-model="./model.glb"
+         scale="0.2 0.2 0.2"
+         rotation="0 0 0"
+         position="0 0 0">
+      </a-entity>
+      -->
     </a-entity>
+
   </a-scene>
+
 </body>
 </html>
