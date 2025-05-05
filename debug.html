@@ -20,7 +20,7 @@
     /* video מתחת, canvas מעליו (שקוף) */
     a-scene video, .arjs-video video{z-index:0 !important;}
     a-scene canvas{z-index:1 !important; background:transparent !important;}
-    .arjs-loader{display:none !important;}
+    /* .arjs-loader{display:none !important;} */ /* Removed this line */
   </style>
 </head>
 <body>
@@ -29,7 +29,7 @@
     embedded
     vr-mode-ui="enabled:false"
     renderer="alpha:true;antialias:true"
-    arjs="sourceType: webcam; debugUIEnabled:true; trackingMethod:best;">
+    arjs="sourceType: webcam; debugUIEnabled:true; trackingMethod:treshold;"> <!-- changed to treshold -->
 
     <!-- מרקר Hiro לבדיקות -->
     <a-marker preset="hiro">
@@ -46,7 +46,7 @@
       const r = scene.renderer;
       r.autoClear      = false;      // לא לנקות בכל פריים
       r.setClearColor(0x000000, 0);  // שקיפות מלאה
-      scene.renderer.domElement.style.background = 'transparent';
+      // scene.renderer.domElement.style.background = 'transparent'; removed this line
       console.log('✅ autoClear disabled, canvas transparent');
     });
   </script>
